@@ -1,0 +1,12 @@
+.title {
+    color: rebeccapurple;
+}
+
+.sub-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    margin: 5px;
+}

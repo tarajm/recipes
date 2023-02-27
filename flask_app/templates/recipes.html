@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <h1>Welcome, {{user_in_db.first_name}} </h1>
+    <div class="sub-header">
+        <div>
+            <h3 class="page_title">All posted recipes</h3>
+        </div>
+        <div>
+            <a href="/recipe/new">+Create</a>
+            <a href="/logout">logout</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Under 30?</th>
+            <th>Posted by</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for recipe in all_recipes %}
+                <tr>
+                    <td>{{recipe.name}}</td>
+                    {% if recipe.under_30 == 1 %}
+                        <td>
+                            <p>Yes</p>
+                        </td>
+                    {% else  %}
+                        <td>
+                            <p>No</p>
+                        </td>
+                        
+                    {% endif %}
+                    <td>{{recipe.posted_by.first_name}}</td>
+                    {% if session['users_id'] == recipe.posted_by.id %}
+                        <td><a href="/view/{{recipe.id}}">View recipe </a><a href="/edit/{{recipe.id}}"> | edit </a><a href="/delete/{{recipe.id}}"> | delete </a></td>
+                        {% else %}
+                            <td><a href="/view/{{recipe.id}}">View recipe</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

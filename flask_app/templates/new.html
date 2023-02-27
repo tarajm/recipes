@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <a href="/recipes">back to recipes</a>
+    <a href="/logout">logout</a>
+    <div class="d-flex flex-wrap justify-content-around">
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for category, message in messages %}            <!-- loop through the messages -->
+                    <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/create" method="POST" class="bg-primary-subtle border">
+            <h2 class="page_title">Add a new recipe!</h2>
+            <div class="form_group">
+                <label for="name">Recipe name:</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form_group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" class="form-control">
+            </div>
+            <div class="form_group">
+                <label for="instructions">Instructions:</label>
+                <input type="text" name="instructions" class="form-control">
+            </div>
+            <div class="form_group">
+                <label for="date_made">Date Cooked/Made:</label>
+                <input type="date" name="date_made" class="form-control">
+            </div>
+            <!-- 
+                <div class="form_group">
+                    <label for="under_30">Under 30 minutes</label>
+                    <select name="under_30">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            -->
+
+            <div class="form_group">
+                <label for="under_30">Under 30 Minutes</label>
+                <input type="radio" name="under_30" value="1" id="yes" checked="checked">
+                <label for="yes"<strong>YES</strong></label>
+                <input type="radio" name="under_30" value="0" id="no" >
+                <label for="no">NO</label>
+
+            </div>
+            <input type="submit" value="Create">
+        </form>
+</body>
+{% endblock %}
